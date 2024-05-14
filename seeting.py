@@ -21,6 +21,11 @@ class Settings(BaseSettings):
     RABBITMQ_VHOST: str = "/"
     RABBITMQ_EXCHANGE: str = "exchange"
 
+    # Server API
+    GET_MACHINE_ALL: str = "machine/all/{machine_id}"
+    GET_MACHINE_INFO: str = "machine/{machine_id}"
+    GET_ORDER_INFO: str = "order/queued/"
+
     class Config:
         case_sensitive = True  # 区分大小写
 

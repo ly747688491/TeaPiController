@@ -1,7 +1,5 @@
 from typing import List
 
-from gpiozero import OutputDevice
-
 
 def ctrl_motor_clean(GPIO_list: List[int]):
     """
@@ -10,9 +8,10 @@ def ctrl_motor_clean(GPIO_list: List[int]):
     :return: None
     """
 
-    for GPIO_ in GPIO_list:
-        motor = OutputDevice(GPIO_)
-        motor.on()
+    # for GPIO_ in GPIO_list:
+    #     motor = OutputDevice(GPIO_)
+    #     motor.on()
+    pass
 
 
 def stop_motor_clean(GPIO_list: List[int]):
@@ -21,6 +20,7 @@ def stop_motor_clean(GPIO_list: List[int]):
     :param GPIO_list: List of GPIOs of the motors.
     :return: None
     """
-    for GPIO_ in GPIO_list:
-        motor = OutputDevice(GPIO_)
-        motor.off()
+    # for GPIO_ in GPIO_list:
+    #     motor = OutputDevice(GPIO_)
+    #     motor.off()
+    pass
