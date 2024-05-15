@@ -1,8 +1,7 @@
 from sqlalchemy.orm import Session
 
-from models.base import Config
-from models.schema import ConfigBase
-from setup.setup_database import get_db
+from models.base import ConfigModel
+from models.schema import ConfigBaseSchema
 
 
 class ConfigService:
@@ -16,10 +15,10 @@ class ConfigService:
         try:
             with self.db as session:
                 server_config = (
-                    session.query(Config).filter(Config.value_group == "server").all()
+                    session.query(ConfigModel).filter(ConfigModel.value_group == "server").all()
                 )
                 server_dict = [
-                    ConfigBase.model_validate(config) for config in server_config
+                    ConfigBaseSchema.model_validate(config) for config in server_config
                 ]
                 return server_dict
         except Exception as e:

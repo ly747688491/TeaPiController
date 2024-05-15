@@ -1,10 +1,9 @@
 from typing import List, Optional
 
 from pydantic import BaseModel, ConfigDict, Field, IPvAnyAddress
-from pydantic.alias_generators import to_camel
 
 
-class DeviceBase(BaseModel):
+class DeviceBaseSchema(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
     name: Optional[str] = Field(
@@ -27,15 +26,15 @@ class DeviceBase(BaseModel):
     sort: Optional[int] = Field(None, description="The sorting index of the device")
 
 
-class DeviceCreate(DeviceBase):
+class DeviceCreateSchema(DeviceBaseSchema):
     pass
 
 
-class Device(DeviceBase):
+class DeviceSchema(DeviceBaseSchema):
     id: Optional[int] = Field(..., description="The unique ID of the device")
 
 
-class MachineBase(BaseModel):
+class MachineBaseSchema(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
     name: Optional[str] = Field(
@@ -47,16 +46,16 @@ class MachineBase(BaseModel):
     code: Optional[str] = Field(None, description="The unique code of the machine")
 
 
-class MachineCreate(MachineBase):
+class MachineCreateSchema(MachineBaseSchema):
     pass
 
 
-class Machine(MachineBase):
+class MachineSchema(MachineBaseSchema):
     id: Optional[int] = Field(..., description="The unique ID of the machine")
-    components: List[Device] = []
+    components: List[DeviceBaseSchema] = []
 
 
-class ConfigBase(BaseModel):
+class ConfigBaseSchema(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
     key: Optional[str] = Field(None, description="The key of the configuration")
@@ -65,9 +64,9 @@ class ConfigBase(BaseModel):
     value_group: str
 
 
-class ConfigCreate(ConfigBase):
+class ConfigCreateSchema(ConfigBaseSchema):
     pass
 
 
-class Config(ConfigBase):
+class ConfigSchema(ConfigBaseSchema):
     id: Optional[int]

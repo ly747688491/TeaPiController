@@ -1,21 +1,24 @@
 """
-@Project        ：TeaPiController 
+@Project        ：TeaPiController
 @File           ：setup_database.py
-@IDE            ：PyCharm 
+@IDE            ：PyCharm
 @Author         ：李延
-@Date           ：2024/5/13 下午4:34 
+@Date           ：2024/5/13 下午4:34
 @Description    ：
 """
+
+from contextlib import contextmanager
+
 from loguru import logger
 
-from core.database import SessionLocal, Base, engine
+from core.database import Base, SessionLocal, engine
+from models.base import ConfigModel, DeviceModel, MachineModel
 
-from models.base import Machine, Device, Config
 
-
+@contextmanager
 def get_db_pro():
     """
-    每一个请求处理完毕后会关闭当前连接，不同的请求使用不同的连接
+    每一个请求处理完毕后会关闭当前连接,不同的请求使用不同的连接
     :return:
     """
     current_db = SessionLocal()

@@ -2,8 +2,6 @@ import json
 
 from utils.log_util import logger
 
-from controllers.motro import ctrl_motor_clean, stop_motor_clean
-
 
 def init_router(ch, method, properties, body):
     logger.info(f"Received message: {body.decode()}")
@@ -17,6 +15,8 @@ def init_router(ch, method, properties, body):
 
     # 根据工作类型参数调用相应的函数
     if action == "start_cleaning":
-        ctrl_motor_clean(GPIO_list)
+        pass
+        # ctrl_motor_clean(GPIO_list)
     elif action == "end_cleaning":
-        stop_motor_clean(GPIO_list)
+        pass
+        # stop_motor_clean(GPIO_list)
