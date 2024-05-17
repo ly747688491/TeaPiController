@@ -21,7 +21,9 @@ class MachineService:
         try:
             with self.db as session:
                 machine = (
-                    session.query(MachineModel).filter_by(code=machine_data["code"]).first()
+                    session.query(MachineModel)
+                    .filter_by(code=machine_data.code)
+                    .first()
                 )
                 if machine:
                     for key, value in machine_data.items():

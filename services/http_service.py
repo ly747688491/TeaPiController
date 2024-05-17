@@ -26,28 +26,19 @@ class HttpService:
     def _process_response(self, response):
         """统一处理返回信息"""
         try:
-            # 尝试将response内容转换为JSON格式，如果不是JSON格式则返回原始内容
             response_data = response.json()
-            # Check if 'code' and 'msg' are in the response_data
             if "code" in response_data and "msg" in response_data:
                 return {
-                    "status_code": response_data[
-                        "code"
-                    ],  # Use the 'code' from the response_data
-                    "data": response_data.get(
-                        "data", {}
-                    ),  # Safely get the 'data' or return an empty dict
-                    "msg": response_data["msg"],  # Use the 'msg' from the response_data
+                    "status_code": response_data["code"],
+                    "data": response_data.get("data", {}),
+                    "msg": response_data["msg"],
                 }
         except ValueError:
-            # If there is a ValueError, it means that the response is not in JSON format
             response_data = response.text
-
-        # If the above try block fails, return the original status code, response text, and headers
         return {
-            "status_code": response.status_code,  # The original HTTP status code
-            "data": response_data,  # The raw response text if not JSON
-            "headers": response.headers,  # The response headers
+            "status_code": response.status_code,
+            "data": response_data,
+            "headers": response.headers,
         }
 
     def get(self):

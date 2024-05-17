@@ -8,14 +8,16 @@ class ConfigService:
     def __init__(self, db: Session):
         self.db = db
 
-    def get_server_config(self):
+    def get_config(self, config_group: str):
         """
         获取后台服务配置信息
         """
         try:
             with self.db as session:
                 server_config = (
-                    session.query(ConfigModel).filter(ConfigModel.value_group == "server").all()
+                    session.query(ConfigModel)
+                    .filter(ConfigModel.value_group == config_group)
+                    .all()
                 )
                 server_dict = [
                     ConfigBaseSchema.model_validate(config) for config in server_config

@@ -11,6 +11,8 @@ class Settings(BaseSettings):
     MACHINE_CODE: str = "SD00001"
     RELOAD: bool = True
     WORKING_CONDITION: bool = False
+    SERVICE_API: str = "http://127.0.0.1:8000/dev-api"
+    
 
     class Config:
         case_sensitive = True  # 区分大小写
